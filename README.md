@@ -9,6 +9,9 @@ Jam fastembed with python, rust and golang. Playing with [虹](https://www.youtu
 > 
 > 2003/08/27 Release
 
+  - **Recommend**:
+    - [福山雅治 - 虹 (【男性限定LIVE】福山☆冬の大感謝祭 其の十七 野郎夜!!4)](https://www.youtube.com/watch?v=Ws0jIc3Cmxk)
+
 ## Reference
 
 - Rust: [fastembed-rs](https://github.com/Anush008/fastembed-rs)
