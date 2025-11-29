@@ -14,3 +14,26 @@ Jam fastembed with python, rust and golang. Playing with [虹](https://www.youtu
 - Rust: [fastembed-rs](https://github.com/Anush008/fastembed-rs)
 - Python: [fastembed](https://github.com/qdrant/fastembed)
 - Go: [fastembed-go](https://github.com/Anush008/fastembed-go)
+
+## Test enviroment
+
+- **python**
+
+```sh
+cd python
+docker build -t niji:python -f Dockerfile .
+```
+
+- **rust**
+
+```sh
+cd rust
+docker build -t niji:rust -f Dockerfile .
+
+docker run -d \
+-v .//data://app//data \
+-v .//rust//.fastembed_cache://app//.fastembed_cache \
+--name nj-rust \
+niji:rust sleep infinity
+docker exec -it nj-rust ./rust_benchmark
+```

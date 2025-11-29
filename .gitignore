@@ -1,3 +1,9 @@
+advence.py
+go/
+docker-compose.yml
+.vscode/
+data/
+.fastembed_cache/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
