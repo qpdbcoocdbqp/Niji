@@ -22,7 +22,7 @@ Jam fastembed with python, rust and golang. Playing with [虹](https://www.youtu
 
 ## Test enviroment
 
-- Testing data senctance is from [Donald Trump - Wikipedia](https://en.wikipedia.org/wiki/Donald_Trump)
+- Testing data sentance is from [Donald Trump - Wikipedia](https://en.wikipedia.org/wiki/Donald_Trump)
 
 ### **PYTHON**
 
