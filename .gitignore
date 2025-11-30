@@ -1,5 +1,7 @@
+*.exe
+memo.md
+logs/
 advence.py
-go/
 docker-compose.yml
 .vscode/
 data/
@@ -8,7 +10,7 @@ data/
 __pycache__/
 *.py[codz]
 *$py.class
-
+*.lock
 # C extensions
 *.so
 
