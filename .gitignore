@@ -1,8 +1,16 @@
+*.exe
+memo.md
+logs/
+advence.py
+docker-compose.yml
+.vscode/
+data/
+.fastembed_cache/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
 *$py.class
-
+*.lock
 # C extensions
 *.so
 
