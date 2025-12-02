@@ -43,7 +43,6 @@ Jam fastembed with python, rust and golang. Playing with [虹](https://www.youtu
     docker exec -it nj-py python -m main -b 1024 -p 1 -t 1 -i ./data/sentences.txt -m BAAI/bge-small-en-v1.5
 
     docker rm -f nj-py
-    # 15, 24, 23
     ```
 
 ### **RUST**
@@ -66,7 +65,6 @@ Jam fastembed with python, rust and golang. Playing with [虹](https://www.youtu
     docker exec -it nj-rs ./rust_benchmark ./data/sentences.txt 1024 1 1
 
     docker rm -f nj-rs
-    # 11, 19, 22
     ```
 
 ### **GO**
@@ -89,5 +87,23 @@ Jam fastembed with python, rust and golang. Playing with [虹](https://www.youtu
     docker exec -it nj-go ./benchmark -path=./data/sentences.txt -batch_size=1024 -cores=4 -threads=4
 
     docker rm -f nj-go
-    # 104, 29, 41
     ```
+
+## Test Result
+
+- CPU: Intel(R) Core(TM) i7-14650HX CPU
+- RAM: unlimit in this test
+- sentences: 632
+
+| language | batch_size| cores | threads | time (second) | throughput (sentences/sec) |
+| --- | --- | --- | --- | --- | --- |
+| Python | 16 | 1 | 1 | 14.8374 | 42.59 |
+| Python | 256 | 1 | 1 | 24.0746 | 26.25 |
+| Python | 1024 | 1 | 1 | 23.2741 | 27.15 |
+| Rust | 16 | 1 | 1 | 11.7152 | 53.95 |
+| Rust | 256 | 1 | 1 | 18.7973 | 33.62 |
+| Rust | 1024 | 1 | 1 | 21.9385 | 28.81 |
+| Go | 16 | 4 | 4 | 120.0003 | 5.27 |
+| Go | 256 | 4 | 4 | 31.5784 | 20.01 |
+| Go | 1024 | 4 | 4 | 32.8536 | 19.24 |
+
