@@ -16,6 +16,7 @@ cargo add --git https://github.com/huggingface/candle.git candle-core --features
 cargo add --git https://github.com/huggingface/candle.git candle-transformers --features cuda
 cargo add --git https://github.com/huggingface/candle.git candle-examples --features cuda
 cargo build --example gemma --release --features cuda
+cargo build --example quantized-gemma --release --features cuda
 
 # run candle for gemma case
 ./target/release/examples/gemma \
@@ -28,3 +29,8 @@ cargo build --example gemma --release --features cuda
 --top-p 0.9 \
 --prompt 'Here is a proof that square root of 2 is not rational: '
 ```
+
+
+
+
+./target/release/examples/quantized-gemma --prompt 'Here is a proof that square root of 2 is not rational: '
