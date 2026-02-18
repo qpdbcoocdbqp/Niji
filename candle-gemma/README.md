@@ -24,19 +24,21 @@
 
     # generate
     ./target/release/examples/gemma \
-    --tokenizer-file $MODEL_HOST/models--google--gemma-3-270m-it/snapshots/ac82b4e820549b854eebf28ce6dedaf9fdfa17b3/tokenizer.json \
-    --config-file $MODEL_HOST/models--google--gemma-3-270m-it/snapshots/ac82b4e820549b854eebf28ce6dedaf9fdfa17b3/config.json \
-    --weight-files $MODEL_HOST/models--google--gemma-3-270m-it/snapshots/ac82b4e820549b854eebf28ce6dedaf9fdfa17b3/model.safetensors \
-    --repeat-penalty 2.0 \
-    --sample-len 128 \
-    --temperature 0.7 \
+    --tokenizer-file $MODEL_HOME/huggingface/hub/models--google--gemma-3-270m-it/snapshots/ac82b4e820549b854eebf28ce6dedaf9fdfa17b3/tokenizer.json \
+    --config-file $MODEL_HOME/huggingface/hub/models--google--gemma-3-270m-it/snapshots/ac82b4e820549b854eebf28ce6dedaf9fdfa17b3/config.json \
+    --weight-files $MODEL_HOME/huggingface/hub/models--google--gemma-3-270m-it/snapshots/ac82b4e820549b854eebf28ce6dedaf9fdfa17b3/model.safetensors \
     --top-p 0.9 \
+    --repeat-penalty 2.0 \
+    --temperature 0.7 \
+    --sample-len 128 \
     --prompt 'Here is a proof that square root of 2 is not rational: '
     ```
 
   * load from `gguf`
   
-    Issue: Load to CUDA still OOM.
+    Issue: `1B` model load to CUDA still OOM.
+    Use `270m` model can load to CUDA.
+
 
     ```sh
     cd candle-gemma
@@ -46,14 +48,13 @@
 
     # generate
     ./target/release/examples/quantized-gemma \
-    --model $MODEL_HOME/huggingface/hub/models--google--gemma-3-1b-it-qat-q4_0-gguf/snapshots/d1be121d36172a4b0b964657e2ee859d61138593/gemma-3-1b-it-q4_0.gguf \
-    --tokenizer $MODEL_HOME/huggingface/hub/models--google--gemma-3-1b-it-qat-q4_0-unquantized/snapshots/a6692c1945954f4aa39a17b8dfba4a7e62db3d4f/tokenizer.json \
-    --prompt 'Here is a proof that square root of 2 is not rational: ' \
-    --context-len 512 \
-    --sample-len 128 \
-    --temperature 0.7 \
+    --model $MODEL_HOME/huggingface/hub/models--ggml-org--gemma-3-270m-it-GGUF/snapshots/e7647be17ae1108f2f605ed061ca0608b171afff/gemma-3-270m-it-Q8_0.gguf \
+    --tokenizer $MODEL_HOME/huggingface/hub/models--google--gemma-3-270m-it/snapshots/ac82b4e820549b854eebf28ce6dedaf9fdfa17b3/tokenizer.json \
     --top-p 0.9 \
     --repeat-penalty 2.0 \
-    --kv-cache-type f16 \
-    --cpu
+    --repeat-last-n 512 \
+    --temperature 0.7 \
+    --context-len 512 \
+    --sample-len 128 \
+    --prompt 'Here is a proof that square root of 2 is not rational: '
     ```
