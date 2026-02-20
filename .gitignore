@@ -1,3 +1,5 @@
+dev-*
+build-log.txt
 *.exe
 memo.md
 logs/
