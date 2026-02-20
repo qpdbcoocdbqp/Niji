@@ -36,7 +36,7 @@
 
   * load from `gguf`
 
-    The script can test `1B`, `270M` model on CUDA.
+    The script can test `1B`, `270M` model on GPU.
     
     ```sh
     cd candle-gemma
