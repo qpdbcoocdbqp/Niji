@@ -1,12 +1,10 @@
-// https://github.com/huggingface/candle/blob/689d255b/candle-transformers/src/models/quantized_gemma3.rs#L261-L269
+// https://github.com/huggingface/candle/blob/689d255b/candle-transformers/src/models/quantized_gemma3.rs
 //! Gemma 3 model implementation with quantization support.
-//! 
 
 use candle::quantized::gguf_file;
 use candle::quantized::QTensor;
 use candle::{DType, Device, IndexOp, Result, Tensor};
 use candle_nn::Module;
-// use candle_transformers::utils;
 use candle_transformers::quantized_nn::RmsNorm;
 use candle::D;
 
@@ -270,15 +268,16 @@ pub struct QuantizedEmbedding {
 }
 
 impl QuantizedEmbedding {
-    pub fn new(weight: QTensor, dev: &Device) -> Result<Self> {
-        let weight = weight.dequantize(dev)?;
+    pub fn new(weight: QTensor, _dev: &Device) -> Result<Self> {
+        let weight = weight.dequantize(&Device::Cpu)?;
         Ok(Self { weight })
     }
 
     pub fn forward(&self, x: &Tensor) -> Result<Tensor> {
         let (b_sz, seq_len) = x.dims2()?;
-        let res = self.weight.index_select(&x.reshape(b_sz * seq_len)?, 0)?;
-        res.reshape((b_sz, seq_len, ()))
+        let x_cpu = x.to_device(&Device::Cpu)?;
+        let res = self.weight.index_select(&x_cpu.reshape(b_sz * seq_len)?, 0)?;
+        res.reshape((b_sz, seq_len, ()))?.to_device(x.device())
     }
 }
 
@@ -352,8 +351,8 @@ impl ModelWeights {
         );
 
         let emb_start = std::time::Instant::now();
-        let tok_emb_qtensor = ct.tensor(reader, "token_embd.weight", device)?;
-        let tok_embeddings = QuantizedEmbedding::new(tok_emb_qtensor, device)?;
+        let tok_emb_qtensor = ct.tensor(reader, "token_embd.weight", &Device::Cpu)?;
+        let tok_embeddings = QuantizedEmbedding::new(tok_emb_qtensor,  &Device::Cpu)?;
         log::info!("Token embeddings loaded in {:.2}ms", emb_start.elapsed().as_secs_f64() * 1000.0);
 
         let norm_start = std::time::Instant::now();
